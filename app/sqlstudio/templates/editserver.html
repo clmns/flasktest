@@ -1,0 +1,40 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<title>Edit Server</title>
+
+<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+<body>
+	<div class="container">
+		<form method="post">
+		  <fieldset>
+			<legend>Edit Server</legend>
+			<label>Server Name</label>
+			<input name="servername" type="text" value="{{server.name}}">
+			<label>IP</label>
+			<input name="serverip" type="text" value="{{server.hostip}}">
+			<label>Customer Name</label>
+			<input name="customername" type="text" value="{{server.customer}}">
+			<label>Username</label>
+			<input name="username" type="text" value="{{server.username}}">
+			<label>Password</label>
+			<input name="passwd" type="password" value="{{server.password}}">
+			<label>Default Database</label>
+			<input name="defaultdb" type="text" value="{{server.default_db}}">
+			<label>Type</label>
+			<select name="type">
+				<option>Productive</option>
+				<option>Testing</option>
+				<option>Delivery</option>
+			</select>
+			<label>DB Type</label>
+			<select name="db_type">
+			{% for type in db_type %}
+				<option>{{ type }}</option>
+			{% endfor %}
+			</select>
+			<button type="submit" class="btn">Edit</button>
+		  </fieldset>
+		</form>
+	</div>
+</body>

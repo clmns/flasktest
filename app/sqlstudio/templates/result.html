@@ -1,0 +1,22 @@
+<table id="myTable" class="tablesorter">
+<thead>
+<tr>
+	{% for res in header %}
+		<th>{{ res }}</th>
+	{% endfor %}
+</tr>
+</thead>
+<tbody>
+{% for row in entries %}
+<tr>
+	{% for entry in row %}
+		{% if entry[1] == 0 %}
+<td>{{ entry.0 }}</td>
+		{% else %}
+<td class="fullText" data-fulltext="{{ entry.0 }}">{{ entry.1 }}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</tbody>
+</table>

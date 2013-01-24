@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block listserver %}
+<div class="span2">
+	<ul class="nav nav-list">
+	{% for server in servers %}
+		<li><a href="/query/{{server.id}}">{{server.name + " " + server.customer}}</a></li>
+	{% endfor %}
+	</ul>
+</div>
+{% endblock %}

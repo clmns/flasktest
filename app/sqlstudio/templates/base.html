@@ -1,0 +1,76 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+    #editor { 
+        
+        width: 100%;
+        height: 50%;
+        /*left: 20%;
+    	top: 0px;
+    	bottom: 1px;
+    	right: 1px;*/
+    }
+    #myTable {
+    }
+    body {
+		overflow: hidden;
+	}
+	.scroll {
+		overflow: scroll;
+		height: 50%;
+		width: 100%;
+    	position: absolute;
+    	top: 50%;
+	}
+</style>
+<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+<script type="text/javascript" src="/static/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="/static/tablesorter/jquery.tablesorter.js"></script>
+<script src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="/static/tablesorter/themes/blue/style.css" type="text/css" id="" media="print, projection, screen" />
+<script type="text/javascript">
+function sendquery() {
+	var txt = ($("#editor").text());
+	txt =  txt.substring(1, txt.length-1);
+	console.log(txt);
+	if (txt != 'X' && txt.length > 0) {
+		$.ajax({ url: "/query{% if id %}{{'/'+id}}{% endif %}", type : "post", data : { "data" : txt }, success: function(result){
+			$("#table").html(result);
+		}});
+	}
+}
+$(document).on("click", ".fullText", function() { alert(JSON.stringify($(this).data("fulltext"))); });
+$(document).ready(function() {
+		
+		$("#myTable").tablesorter();
+
+    	var editor = ace.edit("editor");
+    	editor.setTheme("ace/theme/chrome");
+    	editor.getSession().setMode("ace/mode/sql");
+	}
+
+);
+
+/*$(window).load(function () {
+	<?php if ($_GET['go'] == '1') { print ("sendquery();\n") ;} ?>
+});*/
+$(document).bind("keypress keydown keyup", function(e) {
+	console.log(e.which);
+    if(e.which === 116 && e.ctrlKey) {
+		e.preventDefault();
+		sendquery();
+    }
+});
+</script>
+</head>
+<body>
+{% block listserver %}{% endblock %}
+<div class="span10">
+	<div id="editor"></div>
+</div>
+<div id="table" class="scroll">
+</div>
+</body>
+</html>
