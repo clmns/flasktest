@@ -164,3 +164,4 @@ pip-log.txt
 app/sqlstudio/tmp/*
 app/sqlstudio/static/*
 app/sqlstudio/old/*
+app/testsql.py
