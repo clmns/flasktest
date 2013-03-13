@@ -1,0 +1,16 @@
+<div class="span2">
+{% with flashes = get_flashed_messages() %}
+	{% if flashes %}
+		{% for flash in flashes %}
+	<h5 class="span2">{{flash}}</h5>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+	<ul class="nav nav-list">
+  		<li class="nav-header">List header</li>
+  		<li><a href="{{url_for('addtask')}}">Add Task</a></li>
+  		<li><a href="{{url_for('listdone')}}">Done Tasks</a></li>
+		<li class="nav-header">Logged in as {{username}}</li>
+		<li><a href="{{url_for('listdone')}}">Done Tasks</a></li>
+	</ul>
+</div>

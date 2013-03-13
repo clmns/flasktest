@@ -1,0 +1,31 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<title>{{title}}</title>
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+<body>
+	<div class="container">
+		<form method="post">
+		  <fieldset>
+		  	{{form.csrf_token}}
+			<legend>{{title}}</legend>
+			{{form.srnr.label}}
+			{{form.srnr}}
+			{{form.title.label}}
+			{{form.title}}
+			{{form.text.label}}
+			{{form.text}}
+			{{form.category.label}}
+			{{form.category}}
+			{{form.customer.label}}
+			{{form.customer}}
+			<label class="checkbox">
+				{{form.private}} Private?
+			</label>	
+			<p></p>
+			<button type="submit" class="btn">Submit</button>
+		  </fieldset>
+		</form>
+	</div>
+</body>

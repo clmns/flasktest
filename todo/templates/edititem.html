@@ -1,0 +1,26 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<title>Edit Server</title>
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+<body>
+	<div class="container">
+		<form method="post" enctype=multipart/form-data>
+		  <fieldset>
+			<legend>Edit Item</legend>
+			<label>Service Request</label>
+			<input name="srnr" type="text" value="{{Item.srnr}}">
+			<label>Title</label>
+			<input name="title" type="text" value="{{Item.title}}">
+			<label>Text</label>
+			<textarea name="text">{{Item.text}}</textarea>
+			<label>Category</label>
+			<input name="category" type="text" value="{{Item.category}}">
+			<label>Customer</label>
+			<input name="customer" type="text" value="{{Item.customer}}">
+			<button type="submit" class="btn">Submit</button>
+		  </fieldset>
+		</form>
+	</div>
+</body>

@@ -1,0 +1,138 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<title>Task Overview</title>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
+<body>
+<a href="{{url_for('index')}}"><h1>Tasks</h1></a>
+<div class="span2">
+{% with flashes = get_flashed_messages() %}
+	{% if flashes %}
+		{% for flash in flashes %}
+	<h5 class="span2">{{flash}}</h5>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+	<ul class="nav nav-list">
+  		<li class="nav-header">Actions</li>
+  		<li><a href="{{url_for('addtask')}}">Add Task</a></li>
+  		<li><a href="{{url_for('listdone')}}">Done Tasks</a></li>
+		<li class="nav-header">Logged in as {{username}}</li>
+		<li><a href="{{url_for('log_out')}}">Logout</a></li>
+	</ul>
+</div>
+<div class="span12">
+{% if not teamEmpty %}
+	<h3>Team Tasks</h3>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Owner</th>
+				<th>Service Request</th>
+				<th>Title</th>
+				<th>Text</th>
+				<th>Category</th>
+				<th>Customer</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+	{% if teamTasks[1] %}
+	{% for task in teamTasks %}
+			<tr>
+				<th>{{ task.user.username }}</th>
+				<th>{{ task.srnr }}</th>
+				<th>{{ task.title }}</th>
+				<th>{{ task.text }}</th>
+				<th>{{ task.category }}</th>
+				<th>{{ task.customer }}</th>
+				<th>
+					<a href="{{url_for('edittask', taskid=task.id)}}"><i class="icon-pencil"></i>Edit</a>
+					{% if task.done == 0 %}
+					<a href="{{url_for('done', taskid=task.id)}}"><i class="icon-ok"></i>Done</a>
+					{% elif task.done == 1 %}
+					<a href="{{url_for('notdone', taskid=task.id)}}"><i class="icon-ok"></i>Not Done</a>
+					{% endif %}
+				</th>
+			</tr>
+	{% endfor %}
+	{% else %}
+			<tr>
+				<th>{{ teamTasks.user.username }}</th>
+				<th>{{ teamTasks.srnr }}</th>
+				<th>{{ teamTasks.title }}</th>
+				<th>{{ teamTasks.text }}</th>
+				<th>{{ teamTasks.category }}</th>
+				<th>{{ teamTasks.customer }}</th>
+				<th>
+					<a href="{{url_for('edittask', taskid=teamTasks.id)}}"><i class="icon-pencil"></i>Edit</a>
+					{% if teamTasks.done == 0 %}
+					<a href="{{url_for('done', taskid=teamTasks.id)}}"><i class="icon-ok"></i>Done</a>
+					{% elif teamTasks.done == 1 %}
+					<a href="{{url_for('notdone', taskid=teamTasks.id)}}"><i class="icon-ok"></i>Not Done</a>
+					{% endif %}
+				</th>
+			</tr>
+	{% endif %}
+
+		</tbody>
+</table>
+{% endif %}
+{% if not myEmpty %}
+<table class="table table-hover">
+	<h3>My Tasks</h3>
+	<thead>
+		<tr>
+			<th>Service Request</th>
+			<th>Title</th>
+			<th>Text</th>
+			<th>Category</th>
+			<th>Customer</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+{% if myTasks[1] %}
+{% for task in myTasks %}
+		<tr>
+			<th>{{ task.srnr }}</th>
+			<th>{{ task.title }}</th>
+			<th>{{ task.text }}</th>
+			<th>{{ task.category }}</th>
+			<th>{{ task.customer }}</th>
+			<th>
+				<a href="{{url_for('edittask', taskid=task.id)}}"><i class="icon-pencil"></i>Edit</a>
+				{% if task.done == 0 %}
+				<a href="{{url_for('done', taskid=task.id)}}"><i class="icon-ok"></i>Done</a>
+				{% elif task.done == 1 %}
+				<a href="{{url_for('notdone', taskid=task.id)}}"><i class="icon-ok"></i>Not Done</a>
+				{% endif %}
+			</th>
+		</tr>
+{% endfor %}
+{% else %}
+	<tr>
+			<th>{{ myTasks.srnr }}</th>
+			<th>{{ myTasks.title }}</th>
+			<th>{{ myTasks.text }}</th>
+			<th>{{ myTasks.category }}</th>
+			<th>{{ myTasks.customer }}</th>
+			<th>
+				<a href="{{url_for('edittask', taskid=myTasks.id)}}"><i class="icon-pencil"></i>Edit</a>
+				{% if myTasks.done == 0 %}
+				<a href="{{url_for('done', taskid=myTasks.id)}}"><i class="icon-ok"></i>Done</a>
+				{% elif myTasks.done == 1 %}
+				<a href="{{url_for('notdone', taskid=myTasks.id)}}"><i class="icon-ok"></i>Not Done</a>
+				{% endif %}
+			</th>
+	</tr>
+{% endif %}
+
+	</tbody>
+</table>
+{% endif %}
+
+</div>
+</body>
+</html>

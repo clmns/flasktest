@@ -1,0 +1,26 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+<title>Register</title>
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+<body>
+{% with flashes = get_flashed_messages() %}
+	{% if flashes %}
+		{% for flash in flashes %}
+			<h5>{{flash}}</h5>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+	<div class="container">
+		<h2>Register</h2>
+		<form method="post">
+			{{form.csrf_token}}
+			{{form.username.label}}
+			{{form.username}}
+			{{form.password.label}}
+			{{form.password}}
+			{{form.submit}}
+		</form>
+	</div>
+</body>
