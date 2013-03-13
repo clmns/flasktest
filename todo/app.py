@@ -195,7 +195,7 @@ class TaskView(MethodView):
         return render_template('task.html', title='Add Task', form = self.form)
     def post(self):
         if self.form.validate_on_submit():
-            task = Task(self.form.srnr.data, self.form.title.data, self.form.text.data, self.form.category.data, self.form.customer.data, self.form.private)
+            task = Task(self.form.srnr.data, self.form.title.data, self.form.text.data, self.form.category.data, self.form.customer.data, private=self.form.private)
             db.session.add(task)
             db.session.commit()
             flash('Task added')
