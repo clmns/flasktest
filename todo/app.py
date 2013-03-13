@@ -25,13 +25,6 @@ def login_required(f):
 def logged_in():
     return 'user_id' in session
 
-def return_checkbox(checkbox):
-    if (checkbox==None):
-        return False
-    else:
-        return True
-
-
 """ MODELS """
 
 class User(db.Model):
@@ -74,7 +67,7 @@ class Task(db.Model):
         pos = db.session.query(func.max(Task.position)).first()
         if pos[0] != None:
             self.position = pos[0]+1
-        self.private=return_checkbox(private)
+        self.private=private.data
 
     def update(self, form):
         self.srnr=form.srnr.data
@@ -82,8 +75,7 @@ class Task(db.Model):
         self.text=form.text.data
         self.category=form.category.data
         self.customer=form.customer.data
-        self.private=return_checkbox(form.private)
-        flash(self.private)
+        self.private=form.private.data
 
 """ FORMS """
 
